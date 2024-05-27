@@ -1,11 +1,8 @@
-import copy
-from typing import Optional, List
-from timm.models.layers import trunc_normal_, DropPath,to_2tuple
+from timm.models.layers import to_2tuple
 import torch
-import torch.nn.functional as F
-import matplotlib.pyplot as plt
 from einops import rearrange 
-from torch import nn, Tensor
+from torch import nn 
+
 class MaskedSliceChannelAttention(nn.Module):
 
     def __init__(self, dim, slices=12,num_heads=8, qkv_bias=False):
@@ -36,6 +33,7 @@ class MaskedSliceChannelAttention(nn.Module):
         x = x.view(B,C,H,W)
         x = self.proj(x)
         return x
+    
 class Mlp(nn.Module):
     """ MLP as used in Vision Transformer, MLP-Mixer and related networks
     """
@@ -59,6 +57,7 @@ class Mlp(nn.Module):
         x = self.act(x)
         x = self.fc2(x)
         return x
+    
 class ConvPosEnc(nn.Module):
     def __init__(self, dim, k=3, slices=12,act=False, normtype=False):
         super(ConvPosEnc, self).__init__()
@@ -73,11 +72,11 @@ class ConvPosEnc(nn.Module):
         self.activation = nn.GELU()
 
     def forward(self, x):
-  
         feat = self.proj(x)
         feat = self.norm(feat)
         x = x + self.activation(feat)
         return x
+    
 class TCA_Block(nn.Module):
 
     def __init__(self, dim, num_heads=16, slices=12,mlp_ratio=1., qkv_bias=False,
@@ -207,24 +206,21 @@ class TCA_EntropyModel(nn.Module):
 
 if __name__ == "__main__":
     slices=10
-    test = EntropyModel(dim=320,slices=10).cuda()
+    casual_test = TCA_EntropyModel(dim=320,slices=10).cuda()
     y = torch.randn(1,320,16,16).cuda()
     hyper = torch.randn(1,640,16,16).cuda()
-    means1,scales1,lrp1 = test(hyper,y)
+    means1,scales1,lrp1 = casual_test(hyper,y)
     import numpy as np
-    para = sum([np.prod(list(p.size())) for p in test.parameters()])/1e6
-    print(para)  #35.78  4.59*2=9.18
+
 
     # y2 = y
     for i in range(slices):
         k = i*320//slices
         y2= y.clone()
         y2[0][k:]=0
-        means2,scales2,lrp2 = test(hyper,y2)
+        means2,scales2,lrp2 = casual_test(hyper,y2)
         print(i)
-        # import pdb;pdb.set_trace()
         print((means1-means2).abs().mean(-1).mean(-1)[0][:k].mean(),(means1-means2).abs().mean(-1).mean(-1)[0][k:].mean())
         print((scales1-scales2).abs().mean(-1).mean(-1)[0][:k].mean(),(scales1 -scales2).abs().mean(-1).mean(-1)[0][k:].mean())
-    
         print((lrp1-lrp2).abs().mean(-1).mean(-1)[0][:k].mean(),(lrp1 -lrp2).abs().mean(-1).mean(-1)[0][k:].mean())
     
