@@ -1,4 +1,3 @@
-from utils.datasets import TestKodakDataset,Datasets
 import argparse
 import math
 import random
@@ -10,6 +9,7 @@ from datetime import datetime
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+from compressai.datasets import ImageFolder
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from models import FrequencyAwareTransFormer
@@ -132,7 +132,9 @@ def test_epoch(epoch, test_dataloader, model, criterion):
 
 def parse_args(argv):
     parser = argparse.ArgumentParser(description="Example training script.")
-
+    parser.add_argument(
+        "-d", "--dataset", type=str, required=True, help="Training dataset"
+    )
     parser.add_argument(
         "-e",
         "--epochs",
@@ -213,22 +215,34 @@ def main(argv):
     if args.seed is not None:
         torch.manual_seed(args.seed)
         random.seed(args.seed)
+
+    device = "cuda" if args.cuda and torch.cuda.is_available() else "cpu"
     train_transforms = transforms.Compose(
         [transforms.RandomCrop(args.patch_size), transforms.ToTensor()]
     )
-    device = "cuda" if args.cuda and torch.cuda.is_available() else "cpu"
-    train_dataset = Datasets(data_dir='./training_set_path', transforms=train_transforms)
-    train_dataloader = DataLoader(dataset=train_dataset,
-                              batch_size=args.batch_size,
-                              shuffle=True,
-                              pin_memory=False,
-                              num_workers=8)
-    test_dataset = TestKodakDataset(data_dir='./kodak_path')
-    test_dataloader = DataLoader(dataset=test_dataset, 
-                             shuffle=False,
-                             batch_size=1, 
-                             pin_memory=False, 
-                             num_workers=2)
+
+    test_transforms = transforms.Compose(
+        [transforms.CenterCrop(args.patch_size), transforms.ToTensor()]
+    )
+
+
+    train_dataset = ImageFolder(args.dataset, split="train", transform=train_transforms)
+    test_dataset = ImageFolder(args.dataset, split="test", transform=test_transforms)
+    train_dataloader = DataLoader(
+        train_dataset,
+        batch_size=args.batch_size,
+        num_workers=args.num_workers,
+        shuffle=True,
+        pin_memory=(device == "cuda"),
+    )
+
+    test_dataloader = DataLoader(
+        test_dataset,
+        batch_size=args.test_batch_size,
+        num_workers=args.num_workers,
+        shuffle=False,
+        pin_memory=(device == "cuda"),
+    )
     
     net = FrequencyAwareTransFormer()
     net = net.to(device)
