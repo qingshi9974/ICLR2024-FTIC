@@ -32,16 +32,16 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 ```
 
 ## Pretrained Model
-｜ Lambda | Metric | Link |
-｜--------|--------|------|
- | 0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=drive_link)   |
+| Lambda | Metric | Link |
+|--------|--------|------|
+|0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=drive_link)  |
 
 
 ## Acknowledgement
 Part of our code is borrowed from the following repositories.
 
 - [TCM-LIC](https://github.com/jmliu206/LIC_TCM)
-
+  
 - [STF](https://github.com/Googolxx/STF)
 
 ## Citation
@@ -50,6 +50,6 @@ Part of our code is borrowed from the following repositories.
   title={Frequency-Aware Transformer for Learned Image Compression},
   author={Li, Han and Li, Shaohui and Dai, Wenrui and Li, Chenglin and Zou, Junni and Xiong, Hongkai},
   booktitle={The Twelfth International Conference on Learning Representations},
-  year={2024}
+  year={2023}
 }
 ```
