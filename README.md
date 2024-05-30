@@ -50,6 +50,6 @@ Part of our code is borrowed from the following repositories.
   title={Frequency-Aware Transformer for Learned Image Compression},
   author={Li, Han and Li, Shaohui and Dai, Wenrui and Li, Chenglin and Zou, Junni and Xiong, Hongkai},
   booktitle={The Twelfth International Conference on Learning Representations},
-  year={2024}
+  year={2023}
 }
 ```
