@@ -32,16 +32,17 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 ```
 
 ## Pretrained Model
-｜ Lambda | Metric | Link |
-｜--------|--------|------|
-| 0.0483   | MSE   |   [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=drive_link)   |
+| Lambda | Metric | Link |
+|--------|--------|------|
+|0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=drive_link)  |
 
 
 ## Acknowledgement
 Part of our code is borrowed from the following repositories.
 
-#[TCM-LIC](https://github.com/jmliu206/LIC_TCM)
-#[STF](https://github.com/Googolxx/STF)
+- [TCM-LIC](https://github.com/jmliu206/LIC_TCM)
+  
+- [STF](https://github.com/Googolxx/STF)
 
 ## Citation
 ```
