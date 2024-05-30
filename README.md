@@ -10,12 +10,12 @@ Learned image compression (LIC) has gained traction as an effective solution for
 ## Architectures
 The overall framework of FLIC.
 
-<img src="./img/overall.png"  style="zoom: 33%;" />
+<img src="./assets/overall.png"  style="zoom: 33%;" />
 
 ## RD Results
 RD curves on Kodak.
 
-<img src="./img/rd.png"  style="zoom: 33%;" />
+<img src="./assets/rd.png"  style="zoom: 33%;" />
 
 ## Training
 
