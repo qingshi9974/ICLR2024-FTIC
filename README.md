@@ -34,7 +34,7 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 ## Pretrained Model
 | Lambda | Metric | Link |
 |--------|--------|------|
-|0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=drive_link)  |
+|0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
 
 
 ## Acknowledgement
