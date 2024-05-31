@@ -323,7 +323,7 @@ def main(argv):
                 best_loss = min(loss, best_loss)               
                 if is_best or iterations% 20000 == 0:
                     if args.save :
-                        torch.save(net.state_dict, args.save_path)
+                        torch.save(net.state_dict(), args.save_path)
                     
             iterations = iterations + 1
 
