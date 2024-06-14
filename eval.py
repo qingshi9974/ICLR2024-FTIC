@@ -95,7 +95,7 @@ def main(argv):
     if args.checkpoint:  # load from previous checkpoint
         print("Loading", args.checkpoint)
         checkpoint = torch.load(args.checkpoint, map_location=device)
-        for k, v in checkpoint["state_dict"].items():
+        for k, v in checkpoint.items():
             dictory[k.replace("module.", "")] = v
         net.load_state_dict(dictory,strict=True)
     if args.real:
@@ -111,14 +111,17 @@ def main(argv):
                     torch.cuda.synchronize()
                 s = time.time()
                 out_enc = net.compress(x_padded)
-                out_dec = net.decompress(out_enc["strings"], out_enc["minmax"],out_enc["shape"])
+                out_dec = net.decompress(out_enc["z_strings"], out_enc["minmax"],out_enc["z_shape"])
                 if args.cuda:
                     torch.cuda.synchronize()
                 e = time.time()
                 total_time += (e - s)
                 out_dec["x_hat"] = crop(out_dec["x_hat"], padding)
                 num_pixels = x.size(0) * x.size(2) * x.size(3)
-                Bit_rate += sum(len(s[0]) for s in out_enc["strings"]) * 8.0 / num_pixels
+                print(f'Bitrate: {((len(out_enc["z_strings"][0])+out_enc["y_size"]) * 8.0 / num_pixels):.3f}bpp')
+                print(f'MS-SSIM: {compute_msssim(x, out_dec["x_hat"]):.2f}dB')
+                print(f'PSNR: {compute_psnr(x, out_dec["x_hat"]):.2f}dB')
+                Bit_rate += (len(out_enc["z_strings"][0])+out_enc["y_size"])  * 8.0 / num_pixels
                 PSNR += compute_psnr(x, out_dec["x_hat"])
                 MS_SSIM += compute_msssim(x, out_dec["x_hat"])
 
@@ -140,6 +143,9 @@ def main(argv):
                 total_time += (e - s)
                 out_net['x_hat'].clamp_(0, 1)
                 out_net["x_hat"] = crop(out_net["x_hat"], padding)
+                print(f'PSNR: {compute_psnr(x, out_net["x_hat"]):.2f}dB')
+                print(f'MS-SSIM: {compute_msssim(x, out_net["x_hat"]):.2f}dB')
+                print(f'Bit-rate: {compute_bpp(out_net):.3f}bpp')
                 PSNR += compute_psnr(x, out_net["x_hat"])
                 MS_SSIM += compute_msssim(x, out_net["x_hat"])
                 Bit_rate += compute_bpp(out_net)

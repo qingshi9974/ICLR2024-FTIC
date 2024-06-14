@@ -17,6 +17,14 @@ RD curves on Kodak.
 
 <img src="./assets/rd.png"  style="zoom: 33%;" />
 
+## Dependencies
+- python==3.8.17
+- PyTorch==1.12.1
+- torchvision==0.16.1
+- compressai==1.2.4
+- range-coder==1.1
+- einops
+- timm
 ## Training
 
 ``` 
