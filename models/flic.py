@@ -471,8 +471,8 @@ class FrequencyAwareTransFormer(CompressionModel):
         net = cls(N, M)
         net.load_state_dict(state_dict)
         return net
-    def compress(self, x):
-        output = './y_output'
+    def compress(self, x,output_path):
+        
         y = self.g_a(x)
         y_shape = y.shape[2:]
 
@@ -487,9 +487,10 @@ class FrequencyAwareTransFormer(CompressionModel):
         channel_per_slices = self.M//self.num_slices
         minmax = np.maximum(abs(torch.round(y.cpu()).max()), abs(torch.round(y.cpu()).min()))
         minmax = int(np.maximum(minmax, 1))
-        encoder = RangeEncoder(output + '.bin')
+        encoder = RangeEncoder(output_path)
         samples = np.arange(0, minmax*2+1)
         lower_bound =  LowerBound(1e-9)
+        lower_bound.bound = lower_bound.bound.to(x.device)
 
         means,scales,_ = self.tca(hyper,y_hat_coded)
         for slice_index in range(self.num_slices):
@@ -502,9 +503,9 @@ class FrequencyAwareTransFormer(CompressionModel):
                 for w_idx in range(y_shape[1]):
                     for c_idx in range(channel_per_slices):
 
-                        pmf = self._likelihood(torch.tensor(samples),scale[0][c_idx][h_idx][w_idx],means=mu[0][c_idx][h_idx][w_idx]+minmax)
+                        pmf = self._likelihood(torch.tensor(samples).to(x.device),scale[0][c_idx][h_idx][w_idx],means=mu[0][c_idx][h_idx][w_idx]+minmax)
                         pmf = lower_bound(pmf)
-                        pmf_clip = np.clip(np.array(pmf), 1.0/65536, 1.0)   
+                        pmf_clip = np.clip(np.array(pmf.cpu()), 1.0/65536, 1.0)   
                         pmf_clip = np.round(pmf_clip / np.sum(pmf_clip) * 65536)
                         
                         cdf = list(np.add.accumulate(pmf_clip))
@@ -524,7 +525,7 @@ class FrequencyAwareTransFormer(CompressionModel):
         else:
             values = inputs
         lower_bound =  LowerBound(self.lower_bound)
-
+        lower_bound.bound = lower_bound.bound.to(inputs.device)
         scales = lower_bound(scales)
         values = torch.abs(values)
         upper = self._standardized_cumulative((half - values) / scales)
@@ -538,33 +539,33 @@ class FrequencyAwareTransFormer(CompressionModel):
       
         return half * torch.erfc(const * inputs)
 
-    def decompress(self, z_strings, minmax, z_shape):
+    def decompress(self, z_strings, minmax, z_shape,output_path):
         z_hat = self.entropy_bottleneck.decompress(z_strings, z_shape)
         latent_scales = self.h_scale_s(z_hat)
         latent_means = self.h_mean_s(z_hat)
         hyper = torch.cat((latent_means,latent_scales),dim=1)
-        input_path = './y_output'
         y_shape = [z_hat.shape[2] * 4, z_hat.shape[3] * 4]
         y_hat_coded = torch.zeros((1,self.M,z_hat.shape[2]*4,z_hat.shape[3]*4)).to(z_hat.device)
         lrp_coded = torch.zeros((1,self.M,z_hat.shape[2]*4,z_hat.shape[3]*4)).to(z_hat.device)
         channel_per_slices = self.M//self.num_slices
-        decoder = RangeDecoder(input_path + '.bin')
+        decoder = RangeDecoder(output_path)
         samples = np.arange(0, minmax*2+1)
 
         lower_bound =  LowerBound(1e-9)
+        lower_bound.bound = lower_bound.bound.to(z_hat.device)
         for slice_index in range(self.num_slices):
             means,scales,lrps = self.tca(hyper,y_hat_coded)
             mu = means[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
             scale = scales[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
             lrp = lrps[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
-            y_hat_slice = torch.zeros_like(mu)
+            y_hat_slice = torch.zeros_like(mu).to(z_hat.deivce)
             for h_idx in range(y_shape[0]):
                 for w_idx in range(y_shape[1]):
                     for c_idx in range(channel_per_slices):
 
                         pmf = self._likelihood(torch.tensor(samples),scale[0][c_idx][h_idx][w_idx],means=mu[0][c_idx][h_idx][w_idx]+minmax)
                         pmf = lower_bound(pmf)
-                        pmf_clip = np.clip(np.array(pmf), 1.0/65536, 1.0)   
+                        pmf_clip = np.clip(np.array(pmf.cpu()), 1.0/65536, 1.0)   
                         pmf_clip = np.round(pmf_clip / np.sum(pmf_clip) * 65536)
                        
                         cdf = list(np.add.accumulate(pmf_clip))

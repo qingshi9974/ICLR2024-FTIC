@@ -43,6 +43,13 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 | Lambda | Metric | Link |
 |--------|--------|------|
 |0.0483   | MSE   |  [ckpt_0483.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
+|0.0250   | MSE   |  [ckpt_0250.pth](https://drive.google.com/file/d/1W3Ll1cl8-TMMsuqJWQbALxchOvD32oNj/view?usp=sharing)  |
+|0.0130   | MSE   |  [ckpt_0130.pth](https://drive.google.com/file/d/1Js0F8LLAJI62tsFZBRtSK6j_nnt_eEkZ/view?usp=sharing)  |
+|0.0067   | MSE   |  [ckpt_0067.pth](https://drive.google.com/file/d/15WiSKW-PFnpHaE4nP_IlndiOJHDPS0y8/view?usp=sharing)  |
+|0.0035   | MSE   |  [ckpt_0035.pth](https://drive.google.com/file/d/14wIctJRBhYEfxpnprxP03YP4aWAPodL0/view?usp=sharing)  |
+|0.0018   | MSE   |  [ckpt_0018.pth](https://drive.google.com/file/d/1Ctikh2P0fLRGJfsiR8JSONZaoAGy-Kha/view?usp=sharing)  |
+|60.50   | MS-SSIM  |  [ckpt_0018.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
+|31.73   | MS-SSIM  |  [ckpt_0018.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
 
 
 ## Acknowledgement

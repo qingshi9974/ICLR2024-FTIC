@@ -55,12 +55,6 @@ def crop(x, padding):
 def parse_args(argv):
     parser = argparse.ArgumentParser(description="Example testing script.")
     parser.add_argument("--cuda", action="store_true", help="Use cuda")
-    parser.add_argument(
-        "--clip_max_norm",
-        default=1.0,
-        type=float,
-        help="gradient clipping max norm (default: %(default)s",
-    )
     parser.add_argument("--checkpoint", type=str, help="Path to a checkpoint")
     parser.add_argument("--data", type=str, help="Path to dataset")
     parser.add_argument(
@@ -110,8 +104,10 @@ def main(argv):
                 if args.cuda:
                     torch.cuda.synchronize()
                 s = time.time()
+                output_path = './y_output.bin'
+                out_enc = net.compress(x_padded,output_path)
                 out_enc = net.compress(x_padded)
-                out_dec = net.decompress(out_enc["z_strings"], out_enc["minmax"],out_enc["z_shape"])
+                out_dec = net.decompress(out_enc["z_strings"], out_enc["minmax"],out_enc["z_shape"],output_path)
                 if args.cuda:
                     torch.cuda.synchronize()
                 e = time.time()
