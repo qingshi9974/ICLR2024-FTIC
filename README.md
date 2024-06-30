@@ -51,7 +51,49 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 |60.50   | MS-SSIM  |  [ckpt_msssim_6050.pth](https://drive.google.com/file/d/1L2RwrTz2-uR9Cmr087YUbDTpgMGKdtux/view?usp=sharing)  |
 |31.73   | MS-SSIM  |  [ckpt_msssim_3173.pth](https://drive.google.com/file/d/1JLiSF2ARjptjpJbmo2vd63YDIvcyItWa/view?usp=sharing)  |
 
+## R-D data
+# Kodak,PSNR
+``` 
+bpp,PSNR
+0.1294	29.64
+0.2003	31.132
+0.2993	32.702
+0.4372	34.42
+0.6158	36.17
+0.842	37.918
+``` 
 
+# Kodak,MS-SSIM
+``` 
+bpp,MS-SSIM
+0.1209	13.8585
+0.1719	15.4219
+0.2407	16.9093
+0.3262	18.4375
+0.4443	20.0413
+0.6089	21.6489
+``` 
+# CLIC,PSNR
+``` 
+bpp,PSNR
+0.105	31.38
+0.155	32.83
+0.225	34.23
+0.322	35.69
+0.451	37.15
+0.627	38.64
+``` 
+
+# Tecnick	,PSNR
+``` 
+bpp,PSNR
+0.115	31.64
+0.161	33.1
+0.222	34.49
+0.307	35.91
+0.42	37.3
+0.574	38.68
+``` 
 ## Acknowledgement
 Part of our code is borrowed from the following repositories.
 
