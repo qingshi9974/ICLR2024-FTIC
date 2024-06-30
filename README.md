@@ -48,8 +48,8 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 |0.0067   | MSE   |  [ckpt_mse_0067.pth](https://drive.google.com/file/d/15WiSKW-PFnpHaE4nP_IlndiOJHDPS0y8/view?usp=sharing)  |
 |0.0035   | MSE   |  [ckpt_mse_0035.pth](https://drive.google.com/file/d/14wIctJRBhYEfxpnprxP03YP4aWAPodL0/view?usp=sharing)  |
 |0.0018   | MSE   |  [ckpt_mse_0018.pth](https://drive.google.com/file/d/1Ctikh2P0fLRGJfsiR8JSONZaoAGy-Kha/view?usp=sharing)  |
-|60.50   | MS-SSIM  |  [ckpt_msssim_6050.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
-|31.73   | MS-SSIM  |  [ckpt_msssim_3173.pth](https://drive.google.com/file/d/1l1vYGo9HOX6_0NR7H1TrVJGW67VgyUV_/view?usp=sharing)  |
+|60.50   | MS-SSIM  |  [ckpt_msssim_6050.pth](https://drive.google.com/file/d/1L2RwrTz2-uR9Cmr087YUbDTpgMGKdtux/view?usp=sharing)  |
+|31.73   | MS-SSIM  |  [ckpt_msssim_3173.pth](https://drive.google.com/file/d/1JLiSF2ARjptjpJbmo2vd63YDIvcyItWa/view?usp=sharing)  |
 
 
 ## Acknowledgement
