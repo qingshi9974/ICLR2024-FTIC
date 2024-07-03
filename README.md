@@ -103,10 +103,12 @@ Part of our code is borrowed from the following repositories.
 
 ## Citation
 ```
-@inproceedings{li2023frequency,
-  title={Frequency-Aware Transformer for Learned Image Compression},
-  author={Li, Han and Li, Shaohui and Dai, Wenrui and Li, Chenglin and Zou, Junni and Xiong, Hongkai},
-  booktitle={The Twelfth International Conference on Learning Representations},
-  year={2023}
+@inproceedings{
+li2024frequencyaware,
+title={Frequency-Aware Transformer for Learned  Image Compression},
+author={Han Li and Shaohui Li and Wenrui Dai and Chenglin Li and Junni Zou and Hongkai Xiong},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=HKGQDDTuvZ}
 }
 ```
