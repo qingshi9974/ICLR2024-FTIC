@@ -52,7 +52,7 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 |31.73   | MS-SSIM  |  [ckpt_msssim_3173.pth](https://drive.google.com/file/d/1JLiSF2ARjptjpJbmo2vd63YDIvcyItWa/view?usp=sharing)  |
 
 ## R-D data
-# Kodak,PSNR
+### Kodak,PSNR
 ``` 
 bpp,PSNR
 0.1294	29.640
@@ -63,7 +63,7 @@ bpp,PSNR
 0.842	37.918
 ``` 
 
-# Kodak,MS-SSIM
+### Kodak,MS-SSIM
 ``` 
 bpp,MS-SSIM
 0.1209	13.8585
@@ -73,7 +73,7 @@ bpp,MS-SSIM
 0.4443	20.0413
 0.6089	21.6489
 ``` 
-# CLIC,PSNR
+### CLIC,PSNR
 ``` 
 bpp,PSNR
 0.105	31.38
@@ -84,7 +84,7 @@ bpp,PSNR
 0.627	38.64
 ``` 
 
-# Tecnick	,PSNR
+### Tecnick	,PSNR
 ``` 
 bpp,PSNR
 0.115	31.64
@@ -103,10 +103,12 @@ Part of our code is borrowed from the following repositories.
 
 ## Citation
 ```
-@inproceedings{li2023frequency,
-  title={Frequency-Aware Transformer for Learned Image Compression},
-  author={Li, Han and Li, Shaohui and Dai, Wenrui and Li, Chenglin and Zou, Junni and Xiong, Hongkai},
-  booktitle={The Twelfth International Conference on Learning Representations},
-  year={2023}
+@inproceedings{
+li2024frequencyaware,
+title={Frequency-Aware Transformer for Learned  Image Compression},
+author={Han Li and Shaohui Li and Wenrui Dai and Chenglin Li and Junni Zou and Hongkai Xiong},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=HKGQDDTuvZ}
 }
 ```
