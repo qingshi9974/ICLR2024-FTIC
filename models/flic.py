@@ -399,7 +399,7 @@ class FrequencyAwareTransFormer(CompressionModel):
                       [subpel_conv3x3(N1, 3, 2)]
    
         self.g_a = nn.Sequential(*[ResidualBlockWithStride(3, N1, 2)] + self.m_down1 + self.m_down2 + self.m_down3) 
-        self.g_s = nn.Sequential(*[ResidualBlockUpsample(M, 2*N, 2)] + self.m_up1 + self.m_up2 + self.m_up3)
+        self.g_s = nn.Sequential(*[ResidualBlockUpsample(M, N3, 2)] + self.m_up1 + self.m_up2 + self.m_up3)
 
         self.ha_down1 = [FAT_Block(N*2, 32, 2,4, 0, 'W' if not i%2 else 'SW',True) 
                       for i in range(config[0])] + \
