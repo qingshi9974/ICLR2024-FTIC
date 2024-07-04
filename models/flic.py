@@ -515,7 +515,7 @@ class FrequencyAwareTransFormer(CompressionModel):
                         encoder.encode([symbol], cdf)
      
         encoder.close()
-        y_size = os.path.getsize(output + '.bin')
+        y_size = os.path.getsize(output_path)
         return {"z_strings":  z_strings, "z_shape": z.size()[-2:],"y_size":y_size,"minmax":minmax}
 
     def _likelihood(self, inputs, scales, means=None):
