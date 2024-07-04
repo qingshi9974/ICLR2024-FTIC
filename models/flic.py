@@ -244,7 +244,7 @@ class Swin_FDWA(nn.Module):
             qkv = qkv.view(3, B, H, W, C)
      
             qkv0,qkv1,qkv2,qkv3= qkv.chunk(4,4)
-            qkv_0 = torch.roll(qkv0, shifts=(-self.split_size//2,-self.split_size//2), dims=(2, 3))
+            qkv_0 = torch.roll(qkv0, shifts=(-self.split_size,-self.split_size), dims=(2, 3))
             qkv_0 = qkv_0.view(3, B, L, C//4)
 
             qkv_1 = torch.roll(qkv1, shifts=(-self.split_size//4,-self.split_size//4), dims=(2, 3))
@@ -261,7 +261,7 @@ class Swin_FDWA(nn.Module):
             x3_shift = self.attns[2](qkv_2, H, W)
             x4_shift = self.attns[3](qkv_3, H, W)
                 
-            x1 = torch.roll(x1_shift, shifts=(self.split_size//2, self.split_size//2), dims=(1, 2))
+            x1 = torch.roll(x1_shift, shifts=(self.split_size, self.split_size), dims=(1, 2))
             x2 = torch.roll(x2_shift, shifts=(self.split_size//4, self.split_size//4), dims=(1, 2))
             x3 = torch.roll(x3_shift, shifts=(self.split_size//4, self.split_size), dims=(1, 2))
             x4 = torch.roll(x4_shift, shifts=(self.split_size, self.split_size//4), dims=(1, 2))
