@@ -558,12 +558,12 @@ class FrequencyAwareTransFormer(CompressionModel):
             mu = means[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
             scale = scales[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
             lrp = lrps[:,slice_index*channel_per_slices:(slice_index+1)*channel_per_slices]
-            y_hat_slice = torch.zeros_like(mu).to(z_hat.deivce)
+            y_hat_slice = torch.zeros_like(mu).to(z_hat.device)
             for h_idx in range(y_shape[0]):
                 for w_idx in range(y_shape[1]):
                     for c_idx in range(channel_per_slices):
 
-                        pmf = self._likelihood(torch.tensor(samples),scale[0][c_idx][h_idx][w_idx],means=mu[0][c_idx][h_idx][w_idx]+minmax)
+                        pmf = self._likelihood(torch.tensor(samples).to(z_hat.device),scale[0][c_idx][h_idx][w_idx],means=mu[0][c_idx][h_idx][w_idx]+minmax)
                         pmf = lower_bound(pmf)
                         pmf_clip = np.clip(np.array(pmf.cpu()), 1.0/65536, 1.0)   
                         pmf_clip = np.round(pmf_clip / np.sum(pmf_clip) * 65536)

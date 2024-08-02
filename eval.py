@@ -106,7 +106,6 @@ def main(argv):
                 s = time.time()
                 output_path = './y_output.bin'
                 out_enc = net.compress(x_padded,output_path)
-                out_enc = net.compress(x_padded)
                 out_dec = net.decompress(out_enc["z_strings"], out_enc["minmax"],out_enc["z_shape"],output_path)
                 if args.cuda:
                     torch.cuda.synchronize()
