@@ -1,5 +1,7 @@
 # ICLR2024-Frequency-aware-Transformer-for-Learned-Image-Compression
 
+## News
+🔥 Our paper [AuxT: On Disentangled Training for Nonlinear Transform in Learned Image Compression](https://github.com/qingshi9974/AuxT) has been accepted as a Spotlight at ICLR 2025
 ## Introduction
 This repository is the offical [Pytorch](https://pytorch.org/) implementation of [FLIC: Frequency-aware Transformer for Learned Image Compression (ICLR2024)](https://openreview.net/forum?id=HKGQDDTuvZ). 
 
