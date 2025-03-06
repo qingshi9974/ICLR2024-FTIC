@@ -52,6 +52,11 @@ python eval.py --checkpoint [path of the pretrained checkpoint] --data [path of 
 |0.0018   | MSE   |  [ckpt_mse_0018.pth](https://drive.google.com/file/d/1Ctikh2P0fLRGJfsiR8JSONZaoAGy-Kha/view?usp=sharing)  |
 |60.50   | MS-SSIM  |  [ckpt_msssim_6050.pth](https://drive.google.com/file/d/1L2RwrTz2-uR9Cmr087YUbDTpgMGKdtux/view?usp=sharing)  |
 |31.73   | MS-SSIM  |  [ckpt_msssim_3173.pth](https://drive.google.com/file/d/1JLiSF2ARjptjpJbmo2vd63YDIvcyItWa/view?usp=sharing)  |
+|16.64   | MS-SSIM  |  [ckpt_msssim_1664.pth](https://github.com/qingshi9974/ICLR2024-FTIC/releases/download/v1.0/ckpt_msssim_1664.pth.tar)  |
+|8.73   | MS-SSIM  |  [ckpt_msssim_0873.pth](https://github.com/qingshi9974/ICLR2024-FTIC/releases/download/v1.0/ckpt_msssim_0873.pth.tar)  |
+|4.58   | MS-SSIM  |  [ckpt_msssim_0458.pth](https://github.com/qingshi9974/ICLR2024-FTIC/releases/download/v1.0/ckpt_msssim_0458.pth.tar)  |
+|2.40   | MS-SSIM  |  [ckpt_msssim_0240.pth](https://github.com/qingshi9974/ICLR2024-FTIC/releases/download/v1.0/ckpt_msssim_0240.pth.tar)  |
+
 
 ## R-D data
 ### Kodak,PSNR
